@@ -24,3 +24,11 @@ python view.py
 # or
 pyg view.py
 ```
+
+This gives us the following output:
+
+```
+<div id="div-id" class="div-class and another-class">
+  <span>How wonderful is pyg isn't it?</span>
+</div>
+```
