@@ -1,0 +1,33 @@
+#!/usr/bin/env python
+
+import os
+import sys
+import argparse
+import pyg
+
+##
+p = argparse.ArgumentParser(description='How about using plain python to write HTML?')
+p.add_argument('path', type=str,
+        help='Path to the `pyg` file')
+p.add_argument('opts', type=str, nargs='?',
+        help='Options used when pretty-printing the `pyg` file')
+
+##
+opts = p.parse_args(sys.argv[1:])
+
+##
+if not os.path.exists(opts.path):
+    sys.stderr.write('{}: no such file\n'.format(opts.path))
+    sys.exit(1)
+##
+try:
+    if opts.opts is not None:
+        opts.opts = eval(opts.opts)
+    else:
+        opts.opts = {}
+except:
+    sys.stderr.write('"{}": is not a valid python dict\n'.format(opts.opts))
+    sys.exit(1)
+
+##
+print(pyg.render(opts.path, _globals=opts.opts))
